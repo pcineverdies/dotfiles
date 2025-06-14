@@ -1,0 +1,10 @@
+[Desktop Entry]
+FullScreen=false
+
+[General]
+LockSidebar=true
+ShowSidebar=false
+
+[Recent Files]
+File1[$e]=$HOME/Documents/french_grammar_1
+Name1[$e]=french_grammar_1

@@ -39,35 +39,18 @@ output * bg /home/pcineverdies/Pictures/kiki.jpg fill
 # Modify positions of the screen
 
 # Computer on the bottom, monitor on top
-output DP-3  position 0 0
-output eDP-1 position 0 1440
+# output DP-3  position 0 0
+# output eDP-1 position 0 1440
+
+# Computer on the left, monitor on right
+output DP-3  position 1920 0
+output eDP-1 position 0 0
 
 ### Idle configuration
-#
-# Example configuration:
-#
-# exec swayidle -w \
-#          timeout 300 'swaylock -f -c 000000' \
-#          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-#          before-sleep 'swaylock -f -c 000000'
-#
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
-
-### Input configuration
-#
-# Example configuration:
-#
-#   input "2:14:SynPS/2_Synaptics_TouchPad" {
-#       dwt enabled
-#       tap enabled
-#       natural_scroll enabled
-#       middle_emulation enabled
-#   }
-#
-# You can get the names of your inputs by running: swaymsg -t get_inputs
-# Read `man 5 sway-input` for more information about this section.
+exec swayidle -w \
+         timeout 1200 'swaylock -f -c 000000' \
+         timeout 1500 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+         before-sleep 'swaylock -f -c 000000'
 
 ### Key bindings
 #
@@ -75,6 +58,9 @@ output eDP-1 position 0 1440
 #
     # Start a terminal
     bindsym $mod+Return exec $term
+
+    # Open file explorer
+    bindsym $mod+Shift+n exec Thunar
 
     # Kill focused window
     bindsym $mod+Shift+q kill
@@ -116,6 +102,7 @@ output eDP-1 position 0 1440
 # Workspaces:
 #
     # Switch to workspace
+    bindsym $mod+0 workspace number 0
     bindsym $mod+1 workspace number 1
     bindsym $mod+2 workspace number 2
     bindsym $mod+3 workspace number 3
@@ -125,8 +112,9 @@ output eDP-1 position 0 1440
     bindsym $mod+7 workspace number 7
     bindsym $mod+8 workspace number 8
     bindsym $mod+9 workspace number 9
-    bindsym $mod+0 workspace number 10
+
     # Move focused container to workspace
+    bindsym $mod+Shift+0 move container to workspace number 0
     bindsym $mod+Shift+1 move container to workspace number 1
     bindsym $mod+Shift+2 move container to workspace number 2
     bindsym $mod+Shift+3 move container to workspace number 3
@@ -136,7 +124,18 @@ output eDP-1 position 0 1440
     bindsym $mod+Shift+7 move container to workspace number 7
     bindsym $mod+Shift+8 move container to workspace number 8
     bindsym $mod+Shift+9 move container to workspace number 9
-    bindsym $mod+Shift+0 move container to workspace number 10
+
+    # Drag container to workspace
+    bindsym $mod+Alt+0 move container to workspace number 0; workspace 0
+    bindsym $mod+Alt+1 move container to workspace number 1; workspace 1
+    bindsym $mod+Alt+2 move container to workspace number 2; workspace 2
+    bindsym $mod+Alt+3 move container to workspace number 3; workspace 3
+    bindsym $mod+Alt+4 move container to workspace number 4; workspace 4
+    bindsym $mod+Alt+5 move container to workspace number 5; workspace 5
+    bindsym $mod+Alt+6 move container to workspace number 6; workspace 6
+    bindsym $mod+Alt+7 move container to workspace number 7; workspace 7
+    bindsym $mod+Alt+8 move container to workspace number 8; workspace 8
+    bindsym $mod+Alt+9 move container to workspace number 9; workspace 9
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
 #
@@ -145,13 +144,7 @@ output eDP-1 position 0 1440
     # You can "split" the current object of your focus with
     # $mod+b or $mod+v, for horizontal and vertical splits
     # respectively.
-    bindsym $mod+b splith
-    bindsym $mod+v splitv
-
-    # Switch the current container between different layout styles
-    bindsym $mod+s layout stacking
-    bindsym $mod+w layout tabbed
-    bindsym $mod+e layout toggle split
+    bindsym $mod+Backspace splitt
 
     # Make the current focus fullscreen
     bindsym $mod+f fullscreen
@@ -199,6 +192,7 @@ mode "resize" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
+
 bindsym $mod+r mode "resize"
 
 # Include configs from 3 locations:
@@ -232,10 +226,10 @@ bar {
 }
 
 # Caps into ESC
-input "type:keyboard" xkb_options caps:escape
+input "type:keyboard" xkb_options "caps:escape,compose:ralt"
 
 # No titebar
-default_border pixel 2
+default_border pixel 3
 
 # Trackpad behaviour
 input "1267:12866:VEN_04F3:00_04F3:3242_Touchpad" {
@@ -245,10 +239,16 @@ input "1267:12866:VEN_04F3:00_04F3:3242_Touchpad" {
 }
 
 # Select screenshot and copy on clipboard
-bindsym Ctrl+Shift+Print exec "slurp | grim -g - - | wl-copy"
+bindsym Shift+F10 exec "slurp | grim -g - - | wl-copy"
 
 # Assign to workspaces
 assign [app_id="Thunderbird"] 9
+
+# Modify the behaviour of my magic keyboard
+input "1452:668:Apple_Inc._Magic_Keyboard" {
+  xkb_layout us
+  xkb_options caps:escape,compose:ralt,ctrl:swal_lwin_lct,altwin:swap_lalt_lwin,altwin:swap_ralt_rwin,compose:rwin
+}
 
 include '$(/usr/libexec/sway/layered-include "/usr/share/sway/config.d/*.conf" "/etc/sway/config.d/*.conf" "${XDG_CONFIG_HOME:-$HOME/.config}/sway/config.d/*.conf")'
 
