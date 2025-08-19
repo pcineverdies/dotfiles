@@ -226,7 +226,10 @@ bar {
 }
 
 # Caps into ESC
-input "type:keyboard" xkb_options "caps:escape,compose:ralt"
+input "type:keyboard" {
+  xkb_layout gb(mac)
+  xkb_options "caps:escape,compose:ralt"
+}
 
 # No titebar
 default_border pixel 3
@@ -249,7 +252,6 @@ assign [app_id="Thunderbird"] 9
 
 # Modify the behaviour of my magic keyboard
 input "1452:668:Apple_Inc._Magic_Keyboard" {
-  xkb_layout us
   xkb_options caps:escape,compose:ralt,ctrl:swal_lwin_lct,altwin:swap_lalt_lwin,altwin:swap_ralt_rwin,compose:rwin
 }
 
