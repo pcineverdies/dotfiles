@@ -28,3 +28,4 @@ vim.opt.wrap = false
 vim.opt.showmode = false
 vim.opt.cmdheight = 0
 vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+vim.opt.shell = "zsh"

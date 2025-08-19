@@ -10,11 +10,6 @@ return {
 			local treesitter = require("nvim-treesitter.configs")
 
 			treesitter.setup({
-				highlight = {
-					enable = true,
-				},
-				indent = { enable = true },
-				autotag = { enable = true },
 				ensure_installed = {
 					"json",
 					"yaml",
@@ -25,12 +20,18 @@ return {
 					"bash",
 					"lua",
 					"vim",
+          "vimdoc",
 					"dockerfile",
 					"gitignore",
 					"python",
 					"regex",
 					"c",
 				},
+				highlight = {
+					enable = true,
+				},
+				indent = { enable = true },
+				autotag = { enable = true },
 				context_commentstring = {
 					enable = true,
 					enable_autocmd = false,

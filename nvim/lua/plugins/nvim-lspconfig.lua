@@ -29,5 +29,25 @@ return {
       root_dir = lspconfig.util.root_pattern("compile_commands.json", "compile_flags.txt", ".git"),
     })
 
+    -- pyright setup
+	  lspconfig.pyright.setup({
+		  capabilities = capabilities,
+		  root_dir = util.root_pattern("pyproject.toml", "setup.py", "requirements.txt", ".git"),
+	  })
+
+    -- Groovy - groovyls
+	  lspconfig.groovyls.setup({
+		  capabilities = capabilities,
+		  cmd = { "groovy-language-server" },
+		  root_dir = util.root_pattern(".git", "build.gradle", "settings.gradle"),
+	  })
+
+    -- Bash - bashls
+	  lspconfig.bashls.setup({
+		  cmd = { "bash-language-server", "start" },
+		  filetypes = { "sh", "bash" },
+		  root_dir = util.find_git_ancestor or vim.loop.cwd,
+		  capabilities = capabilities,
+	  })
 	end,
 }
