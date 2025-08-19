@@ -22,8 +22,8 @@ set $term foot
 # Recommends: rofi-wayland
 set $rofi_cmd rofi \
         -terminal '$term' \
-	-show drun \
-	-theme ~/.config/rofi/launchers/type-1/style-5.rasi
+        -show drun \
+        -theme ~/.config/rofi/launchers/type-1/style-5.rasi
 
 # Shows a combined list of the applications with desktop files and
 # executables from PATH.
@@ -233,9 +233,12 @@ default_border pixel 3
 
 # Trackpad behaviour
 input "1267:12866:VEN_04F3:00_04F3:3242_Touchpad" {
-	dwt enabled
-	tap enabled
-	middle_emulation enabled
+  dwt enabled
+  tap enabled
+  middle_emulation enabled
+  accel_profile "adaptive"
+  pointer_accel 0
+  natural_scroll enabled
 }
 
 # Select screenshot and copy on clipboard
